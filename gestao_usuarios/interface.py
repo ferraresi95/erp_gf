@@ -1,3 +1,5 @@
+import streamlit as st
+
 def mostrar_usuarios():
     st.subheader("👤 Gestão de Usuários")
 
@@ -10,4 +12,4 @@ def mostrar_usuarios():
             enviar = st.form_submit_button("Cadastrar")
 
             if enviar:
-                st.success("Formulário enviado.")
+                st.success(f"Formulário enviado com nome: {nome}")
