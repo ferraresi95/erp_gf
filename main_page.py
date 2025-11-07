@@ -18,15 +18,19 @@ def tela_login():
     entrar = st.button("Entrar")
 
     if entrar:
-        usuario = autenticar_usuario(email, senha)
-        if usuario:
-            st.session_state.usuario_autenticado = True
-            st.session_state.usuario_info = usuario
-            registrar_log_acesso(usuario['id'], usuario['nome'], usuario['perfil'])
-            st.success(f"Bem-vindo, {usuario['nome']}!")
-            st.experimental_rerun()
-        else:
-            st.error("Credenciais inválidas.")
+        try:
+            usuario = autenticar_usuario(email, senha)
+            if usuario:
+                st.session_state.usuario_autenticado = True
+                st.session_state.usuario_info = usuario
+                registrar_log_acesso(usuario['id'], usuario['nome'], usuario['perfil'])
+                st.success(f"Bem-vindo, {usuario['nome']}!")
+                st.experimental_rerun()
+            else:
+                st.error("Credenciais inválidas.")
+        except Exception as e:
+            st.error(f"Erro inesperado: {e}")
+
 
 # Bloqueia acesso se não estiver logado
 if not st.session_state.usuario_autenticado:
