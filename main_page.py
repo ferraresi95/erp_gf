@@ -29,7 +29,7 @@ menu = st.sidebar.radio(
                             "📁 Navegação"
                             , [
                                     "🏠 Início"
-                                    ,"👤Gestão de Usuários"
+                                    ,"👤Gestão de Usuários", ["teste","teste2"]
                                     ,"🗂️ Cadastros"
                                     , "🧾 Faturamento"
                                     , "💰 Financeiro"
