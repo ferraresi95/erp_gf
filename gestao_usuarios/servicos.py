@@ -1,20 +1,24 @@
+from supabase_config import supabase
 from gestao_usuarios.modelos import Usuario
-from gestao_usuarios import supabase  # se você inicializou no __init__.py
 
 def cadastrar_usuario(nome, email, senha, perfil):
-    dados = {
-        "nome": nome,
-        "email": email,
-        "senha": senha,  # idealmente criptografar no futuro
-        "perfil": perfil
-    }
-    supabase.table("usuarios").insert(dados).execute()
+    try:
+        usuario = Usuario(nome, email, senha, perfil)
+        dados = usuario.to_dict()
+        resposta = supabase.table("usuarios").insert(dados).execute()
+        return resposta.data
+    except Exception as e:
+        return f"Erro ao cadastrar usuário: {e}"
 
 def listar_usuarios():
-    response = supabase.table("usuarios").select("*").execute()
-    if response.data:
-        return response.data
-    return []
+    try:
+        resposta = supabase.table("usuarios").select("*").order("nome", ascending=True).execute()
+        return resposta.data or []
+    except Exception as e:
+        return f"Erro ao listar usuários: {e}"
 
 def excluir_usuario(id_usuario):
-    supabase.table("usuarios").delete().eq("id", id_usuario).execute()
+    try:
+        supabase.table("usuarios").delete().eq("id", id_usuario).execute()
+    except Exception as e:
+        return f"Erro ao excluir usuário: {e}"
