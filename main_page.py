@@ -44,6 +44,10 @@ if menu == "🏠 Início":
     with col2:
         st.image("https://cdn-icons-png.flaticon.com/512/2920/2920257.png", width=150)
 
+elif menu == "👤 Gestão de Usuário":
+    from gestao_usuarios.interface import mostrar_usuarios
+    mostrar_usuarios()
+    
 elif menu == "🧾 Faturamento":
     mostrar_faturamento()
 
