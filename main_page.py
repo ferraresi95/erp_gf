@@ -21,6 +21,8 @@ def tela_login():
         else:
             st.error("Credenciais inválidas.")
 
+tela_login()
+
 # Configuração da página
 st.set_page_config(page_title="ERP - Sistema de Gestão", layout="wide", page_icon="📊")
 
@@ -84,4 +86,3 @@ elif menu == "💰 Financeiro":
 elif menu == "📈 Controladoria":
     mostrar_controladoria()
 
-tela_login()
