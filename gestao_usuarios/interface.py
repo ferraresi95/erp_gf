@@ -19,4 +19,9 @@ def mostrar_usuarios():
                 elif not validar_senha(senha):
                     st.error("Senha fraca. Use pelo menos 6 caracteres.")
                 else:
-                    st.success(f"Formulário validado para: {nome}")
+                    resultado = cadastrar_usuario(nome, email, senha, perfil)
+                    st.write("Resultado do cadastro:", resultado)  # 👈 Aqui está o log
+                    if isinstance(resultado, str) and resultado.startswith("Erro"):
+                        st.error(resultado)
+                    else:
+                        st.success("Usuário cadastrado com sucesso!")
