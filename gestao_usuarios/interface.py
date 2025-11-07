@@ -13,4 +13,9 @@ def mostrar_usuarios():
             enviar = st.form_submit_button("Cadastrar")
 
             if enviar:
-                st.success(f"Formulário enviado com nome: {nome}")
+                if not validar_email(email):
+                    st.error("E-mail inválido.")
+                elif not validar_senha(senha):
+                    st.error("Senha fraca. Use pelo menos 6 caracteres.")
+                else:
+                    st.success(f"Formulário validado para: {nome}")
