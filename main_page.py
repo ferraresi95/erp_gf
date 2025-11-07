@@ -25,7 +25,7 @@ def tela_login():
                 st.session_state.usuario_info = usuario
                 registrar_log_acesso(usuario['id'], usuario['nome'], usuario['perfil'])
                 st.success(f"Bem-vindo, {usuario['nome']}!")
-                st.experimental_rerun()
+                st.rerun()
             else:
                 st.error("Credenciais inválidas.")
         except Exception as e:
