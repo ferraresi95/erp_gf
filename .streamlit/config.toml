@@ -1,0 +1,6 @@
+[theme]
+primaryColor = "#2e7d32"         # Verde escuro elegante
+backgroundColor = "#f5f5dc"      # Bege claro (estilo papel antigo)
+secondaryBackgroundColor = "#e0e0d1"  # Bege acinzentado para contraste
+textColor = "#2c3e50"            # Azul escuro para boa leitura
+font = "sans serif"
