@@ -20,7 +20,6 @@ def mostrar_usuarios():
                     st.error("Senha fraca. Use pelo menos 6 caracteres.")
                 else:
                     resultado = cadastrar_usuario(nome, email, senha, perfil)
-                    st.write("Resultado do cadastro:", resultado)  # 👈 Aqui está o log
                     if isinstance(resultado, str) and resultado.startswith("Erro"):
                         st.error(resultado)
                     else:

@@ -1,5 +1,6 @@
 from supabase_config import supabase
 from gestao_usuarios.modelos import Usuario
+from datetime import datetime
 
 def cadastrar_usuario(nome, email, senha, perfil):
     try:
@@ -22,3 +23,21 @@ def excluir_usuario(id_usuario):
         supabase.table("usuarios").delete().eq("id", id_usuario).execute()
     except Exception as e:
         return f"Erro ao excluir usuário: {e}"
+
+def autenticar_usuario(email, senha):
+    try:
+        resposta = supabase.table("usuarios").select("*").eq("email", email).eq("senha", senha).single().execute()
+        return resposta.data
+    except Exception as e:
+        return None
+
+def registrar_log_acesso(id_usuario, nome, perfil):
+    try:
+        supabase.table("logs_acesso").insert({
+            "id_usuario": id_usuario,
+            "nome": nome,
+            "perfil": perfil,
+            "data_hora": datetime.now().isoformat()
+        }).execute()
+    except Exception as e:
+        print(f"Erro ao registrar log: {e}")

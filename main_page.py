@@ -4,6 +4,22 @@ from faturamento import mostrar_faturamento
 from controladoria import mostrar_controladoria
 from gestao_usuarios.interface import mostrar_usuarios
 from supabase_config import supabase
+from gestao_usuarios.servicos import autenticar_usuario, registrar_log_acesso
+
+def tela_login():
+    st.subheader("🔐 Login")
+    email = st.text_input("E-mail")
+    senha = st.text_input("Senha", type="password")
+    entrar = st.button("Entrar")
+
+    if entrar:
+        usuario = autenticar_usuario(email, senha)
+        if usuario:
+            st.success(f"Bem-vindo, {usuario['nome']}!")
+            registrar_log_acesso(usuario['id'], usuario['nome'], usuario['perfil'])
+            mostrar_usuarios()
+        else:
+            st.error("Credenciais inválidas.")
 
 # Configuração da página
 st.set_page_config(page_title="ERP - Sistema de Gestão", layout="wide", page_icon="📊")
@@ -68,3 +84,4 @@ elif menu == "💰 Financeiro":
 elif menu == "📈 Controladoria":
     mostrar_controladoria()
 
+tela_login()
