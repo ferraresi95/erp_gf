@@ -1,5 +1,6 @@
 import streamlit as st
 from gestao_usuarios.validacoes import validar_email, validar_senha
+from gestao_usuarios.servicos import cadastrar_usuario
 
 def mostrar_usuarios():
     st.subheader("👤 Gestão de Usuários")
