@@ -2,7 +2,7 @@ import streamlit as st
 from financeiro import mostrar_financeiro
 from faturamento import mostrar_faturamento
 from controladoria import mostrar_controladoria
-#from gestao_usuarios.interface import mostrar_usuarios
+from gestao_usuarios.interface import mostrar_usuarios
 
 # Configuração da página
 st.set_page_config(page_title="ERP - Sistema de Gestão", layout="wide", page_icon="📊")
