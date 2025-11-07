@@ -3,6 +3,14 @@ from financeiro import mostrar_financeiro
 from faturamento import mostrar_faturamento
 from controladoria import mostrar_controladoria
 from gestao_usuarios.interface import mostrar_usuarios
+from supabase_config import supabase
+
+def testar_conexao_supabase():
+    try:
+        resposta = supabase.table("usuarios").select("*").limit(1).execute()
+        return resposta.data or "Conexão OK, mas nenhum dado encontrado."
+    except Exception as e:
+        return f"Erro na conexão: {e}"
 
 # Configuração da página
 st.set_page_config(page_title="ERP - Sistema de Gestão", layout="wide", page_icon="📊")
@@ -66,3 +74,7 @@ elif menu == "💰 Financeiro":
 
 elif menu == "📈 Controladoria":
     mostrar_controladoria()
+
+st.markdown("### 🔌 Teste de conexão com Supabase")
+resultado = testar_conexao_supabase()
+st.write(resultado)
