@@ -2,6 +2,7 @@ import streamlit as st
 from financeiro import mostrar_financeiro
 from faturamento import mostrar_faturamento
 from controladoria import mostrar_controladoria
+from gestao_usuarios.interface import mostrar_usuarios
 
 # Configuração da página
 st.set_page_config(page_title="ERP - Sistema de Gestão", layout="wide", page_icon="📊")
@@ -45,7 +46,6 @@ if menu == "🏠 Início":
         st.image("https://cdn-icons-png.flaticon.com/512/2920/2920257.png", width=150)
 
 elif menu == "👤Gestão de Usuários":
-    from gestao_usuarios.interface import mostrar_usuarios
     mostrar_usuarios()
 
 elif menu == "🧾 Faturamento":
