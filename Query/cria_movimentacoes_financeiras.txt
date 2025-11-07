@@ -1,0 +1,10 @@
+create table movimentacoes_financeiras (
+id uuid,
+empresa_id	UUID,
+tipo	text,
+descricao	text,
+valor	numeric(18,2),
+data	Date,
+categoria	text,
+arquivo_url	text,
+created_at	Timestamp	)
