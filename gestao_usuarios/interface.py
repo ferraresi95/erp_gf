@@ -3,7 +3,7 @@ from gestao_usuarios.servicos import cadastrar_usuario, listar_usuarios
 from gestao_usuarios.validacoes import validar_email, validar_senha
 
 def mostrar_usuarios():
-    st.subheader("👤 Gestão de Usuários")
+    st.subheader("👤Gestão de Usuários")
 
     # Formulário de cadastro
     with st.expander("➕ Cadastrar novo usuário"):
