@@ -5,12 +5,12 @@ from controladoria import mostrar_controladoria
 from gestao_usuarios.interface import mostrar_usuarios
 from supabase_config import supabase
 
-def testar_conexao_supabase():
+def consultar_grupo_despesas():
     try:
-        resposta = supabase.table("usuarios").select("*").limit(1).execute()
-        return resposta.data or "Conexão OK, mas nenhum dado encontrado."
+        resposta = supabase.table("grupo_despesas").select("*").execute()
+        return resposta.data or "Tabela vazia."
     except Exception as e:
-        return f"Erro na conexão: {e}"
+        return f"Erro ao consultar grupo_despesas: {e}"
 
 # Configuração da página
 st.set_page_config(page_title="ERP - Sistema de Gestão", layout="wide", page_icon="📊")
@@ -75,6 +75,10 @@ elif menu == "💰 Financeiro":
 elif menu == "📈 Controladoria":
     mostrar_controladoria()
 
-st.markdown("### 🔌 Teste de conexão com Supabase")
-resultado = testar_conexao_supabase()
-st.write(resultado)
+st.markdown("### 📊 Consulta: grupo_despesas")
+resultado = consultar_grupo_despesas()
+
+if isinstance(resultado, list):
+    st.table(resultado)
+else:
+    st.error(resultado)
