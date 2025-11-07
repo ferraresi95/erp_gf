@@ -6,6 +6,11 @@ from gestao_usuarios.interface import mostrar_usuarios
 from supabase_config import supabase
 from gestao_usuarios.servicos import autenticar_usuario, registrar_log_acesso
 
+# Inicializa estado de sessão
+if "usuario_autenticado" not in st.session_state:
+    st.session_state.usuario_autenticado = False
+
+# Função de login
 def tela_login():
     st.subheader("🔐 Login")
     email = st.text_input("E-mail")
@@ -15,13 +20,24 @@ def tela_login():
     if entrar:
         usuario = autenticar_usuario(email, senha)
         if usuario:
-            st.success(f"Bem-vindo, {usuario['nome']}!")
+            st.session_state.usuario_autenticado = True
+            st.session_state.usuario_info = usuario
             registrar_log_acesso(usuario['id'], usuario['nome'], usuario['perfil'])
-            mostrar_usuarios()
+            st.success(f"Bem-vindo, {usuario['nome']}!")
+            st.experimental_rerun()
         else:
             st.error("Credenciais inválidas.")
 
-tela_login()
+# Bloqueia acesso se não estiver logado
+if not st.session_state.usuario_autenticado:
+    st.warning("⚠️ Você precisa estar logado para acessar o sistema.")
+    tela_login()
+    st.stop()
+
+# Botão de logout
+if st.sidebar.button("🚪 Sair"):
+    st.session_state.usuario_autenticado = False
+    st.experimental_rerun()
 
 # Configuração da página
 st.set_page_config(page_title="ERP - Sistema de Gestão", layout="wide", page_icon="📊")
@@ -45,16 +61,16 @@ st.markdown("""
 
 # Menu lateral
 menu = st.sidebar.radio(
-                            "📁 Navegação"
-                            , [
-                                    "🏠 Início"
-                                    ,"👤Gestão de Usuários"
-                                    ,"🗂️ Cadastros"
-                                    , "🧾 Faturamento"
-                                    , "💰 Financeiro"
-                                    , "📈 Controladoria"
-                            ]
-                    )
+    "📁 Navegação",
+    [
+        "🏠 Início",
+        "👤Gestão de Usuários",
+        "🗂️ Cadastros",
+        "🧾 Faturamento",
+        "💰 Financeiro",
+        "📈 Controladoria"
+    ]
+)
 
 # Conteúdo principal
 if menu == "🏠 Início":
@@ -85,4 +101,3 @@ elif menu == "💰 Financeiro":
 
 elif menu == "📈 Controladoria":
     mostrar_controladoria()
-
