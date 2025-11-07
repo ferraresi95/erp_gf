@@ -24,7 +24,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Menu lateral
-menu = st.sidebar.radio("📁 Navegação", ["🏠 Início","Gestão de Usuários","Cadastros", "🧾 Faturamento", "💰 Financeiro", "📈 Controladoria"])
+menu = st.sidebar.radio("📁 Navegação", ["🏠 Início","👤Gestão de Usuários","🗂️ Cadastros", "🧾 Faturamento", "💰 Financeiro", "📈 Controladoria"])
 
 # Conteúdo principal
 if menu == "🏠 Início":
